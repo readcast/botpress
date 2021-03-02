@@ -4,6 +4,7 @@ import defaultJsonBuilder from 'json-schema-defaults'
 import _ from 'lodash'
 import { Memoize } from 'lodash-decorators'
 import path from 'path'
+import uuid from 'uuid/v1'
 import { VError } from 'verror'
 import yn from 'yn'
 
@@ -179,8 +180,18 @@ export default class ConfigReader {
 
   // Don't @Memoize() this fn. It only memoizes on the first argument
   // https://github.com/steelsojka/lodash-decorators/blob/master/src/memoize.ts#L15
-  public getForBot(moduleId: string, botId: string, ignoreGlobal?: boolean): Promise<Config> {
-    const cacheKey = `${moduleId}//${botId}//${!!ignoreGlobal}`
+  public async getForBot(
+    moduleId: string,
+    botId: string,
+    ignoreGlobal?: boolean,
+    ignoreCache?: boolean
+  ): Promise<Config> {
+    let cacheKey = `${moduleId}//${botId}//${!!ignoreGlobal}`
+
+    if (ignoreCache) {
+      cacheKey += `//${uuid()}`
+    }
+
     return this.getForBotMemoized(cacheKey)
   }
 

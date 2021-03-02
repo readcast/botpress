@@ -2059,8 +2059,14 @@ declare module 'botpress/sdk' {
      * @param moduleId
      * @param botId
      * @param ignoreGlobal Enable this when you want only bot-specific configuration to be possible
+     * @param ignoreCache Ignore data caching
      */
-    export function getModuleConfigForBot(moduleId: string, botId: string, ignoreGlobal?: boolean): Promise<any>
+    export function getModuleConfigForBot(
+      moduleId: string,
+      botId: string,
+      ignoreGlobal?: boolean,
+      ignoreCache?: boolean
+    ): Promise<any>
 
     /**
      * Returns the configuration options of Botpress
