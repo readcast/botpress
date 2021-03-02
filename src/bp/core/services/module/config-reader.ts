@@ -184,11 +184,11 @@ export default class ConfigReader {
     moduleId: string,
     botId: string,
     ignoreGlobal?: boolean,
-    ignoreCache?: boolean
+    options?: { ignoreCache?: boolean }
   ): Promise<Config> {
     let cacheKey = `${moduleId}//${botId}//${!!ignoreGlobal}`
 
-    if (ignoreCache) {
+    if (options?.ignoreCache) {
       cacheKey += `//${uuid()}`
     }
 

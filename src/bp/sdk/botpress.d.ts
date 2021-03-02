@@ -1729,6 +1729,11 @@ declare module 'botpress/sdk' {
     asChatUser?: boolean
   }
 
+  export interface GetModuleConfigForBotOptions {
+    /** When enabled, ignore data caching  */
+    ignoreCache?: boolean
+  }
+
   ////////////////
   //////// API
   ////////////////
@@ -2059,13 +2064,13 @@ declare module 'botpress/sdk' {
      * @param moduleId
      * @param botId
      * @param ignoreGlobal Enable this when you want only bot-specific configuration to be possible
-     * @param ignoreCache Ignore data caching
+     * @param options? Specify function options
      */
     export function getModuleConfigForBot(
       moduleId: string,
       botId: string,
       ignoreGlobal?: boolean,
-      ignoreCache?: boolean
+      options?: GetModuleConfigForBotOptions
     ): Promise<any>
 
     /**
